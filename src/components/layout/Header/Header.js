@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Button from '@material-ui/core/Button';
 
 import clsx from 'clsx';
 
@@ -10,8 +11,17 @@ import styles from './Header.module.scss';
 
 const Component = ({className, children}) => (
   <div className={clsx(className, styles.root)}>
-    <h2>Header</h2>
-    {children}
+    <div className={styles.wrapper}>
+      <Button className={styles.header_button} href="https://google.com" variant="outlined" color="primary" size="large">
+      Login with Google
+      </Button>
+      <Button className={styles.header_button} href="/" variant="outlined" color="primary" size="large">
+      My ads
+      </Button>
+      <Button className={styles.header_button} href="/" variant="outlined" color="secondary" size="large">
+      Logout
+      </Button>
+    </div>
   </div>
 );
 
