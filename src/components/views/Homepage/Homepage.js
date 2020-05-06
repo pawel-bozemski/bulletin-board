@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CardGroup from 'react-bootstrap/CardGroup';
 import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+
 
 import clsx from 'clsx';
 
@@ -61,7 +63,9 @@ const Component = ({className, children}) => (
         </Card>
       ))}
     </CardGroup>
-    {children}
+    <Button className={styles.form_button}  size="lg" block variant="dark" type="submit">
+      Add Post
+    </Button>
   </div>
 );
 
