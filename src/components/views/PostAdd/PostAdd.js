@@ -95,10 +95,8 @@ const Component = ({className}) => (
           <Form.Group controlId="postDelivery">
             <Form.Label>Shipping</Form.Label>
             <Form.Control as="select">
-              <option>Only pickup</option>
-              <option>After payment</option>
-              <option>Only Cash on delivery</option>
-              <option>All options possible</option>
+              <option>only pickup</option>
+              <option>delivery</option>
             </Form.Control>
           </Form.Group>
         </Col>
@@ -111,7 +109,6 @@ const Component = ({className}) => (
 );
 
 Component.propTypes = {
-  children: PropTypes.node,
   className: PropTypes.string,
 };
 
