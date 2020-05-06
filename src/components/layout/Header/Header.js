@@ -16,7 +16,10 @@ const Component = () => (
             Login with Google
         </Button>
         <Button className={styles.header_button} href="/" variant="outline-info" size="lg">
-            My ads
+            My posts
+        </Button>
+        <Button className={styles.header_button} href="/post/add" variant="outline-info" size="lg">
+            Add post
         </Button>
         <Button className={styles.header_button} href="/" variant="outline-danger" size="lg">
             Logout
