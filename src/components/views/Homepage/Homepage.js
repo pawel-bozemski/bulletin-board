@@ -53,14 +53,10 @@ const mapStateToProps = state => ({
   posts: getAll(state),
 });
 
-// const mapDispatchToProps = dispatch => ({
-//   someAction: arg => dispatch(reduxActionCreator(arg)),
-// });
 
 const HomepageContainer = connect(mapStateToProps)(Component);
 
 export {
-  // Component as Homepage,
   HomepageContainer as Homepage,
   Component as HomepageComponent,
 };

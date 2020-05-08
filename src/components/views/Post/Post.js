@@ -14,7 +14,6 @@ import { getAll } from '../../../redux/postsRedux.js';
 import styles from './Post.module.scss';
 
 const Component = ({className, posts, match}) => {
-
   return(
     <div className={clsx(className, styles.root)}>
       {posts.filter(post => post.id === match.params.id).map(post => (
@@ -27,6 +26,7 @@ const Component = ({className, posts, match}) => {
             </Card.Text>
           </Card.Body>
           <ListGroup className="list-group-flush">
+            <ListGroupItem>Posted: {post.date}</ListGroupItem>
             <ListGroupItem>Seller: {post.name}</ListGroupItem>
             <ListGroupItem>Email: {post.email}</ListGroupItem>
             <ListGroupItem>Phone number: {post.phone}</ListGroupItem>
@@ -34,7 +34,7 @@ const Component = ({className, posts, match}) => {
             <ListGroupItem>${post.price}</ListGroupItem>
           </ListGroup>
           <Card.Body>
-            <Button variant="primary" size="lg"  href="#" block>
+            <Button variant="primary" size="lg"  href={`/post/${post.id}/edit`} block>
               Edit Post
             </Button>
             <Button variant="secondary" href="/" size="lg" block>
@@ -58,10 +58,6 @@ Component.propTypes = {
 const mapStateToProps = state => ({
   posts: getAll(state),
 });
-
-// const mapDispatchToProps = dispatch => ({
-//   someAction: arg => dispatch(reduxActionCreator(arg)),
-// });
 
 const PostContainer = connect(mapStateToProps)(Component);
 
