@@ -199,9 +199,9 @@ const mapDispatchToProps = dispatch => ({
   editPost: post => dispatch(editPost(post)),
 });
 
-const PostEditContainer = connect(mapStateToProps, mapDispatchToProps)(Component);
+const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
 
 export {
-  PostEditContainer as PostEdit,
+  Container as PostEdit,
   Component as PostEditComponent,
 };

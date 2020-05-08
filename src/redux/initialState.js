@@ -43,4 +43,8 @@ export const initialState = {
       error: false,
     },
   },
+  user: {
+    id: '1',
+    isLogged: false,
+  },
 };

@@ -9,9 +9,10 @@ import { getAll } from '../../../redux/postsRedux.js';
 
 import clsx from 'clsx';
 import styles from './Homepage.module.scss';
+import { getUser } from '../../../redux/userRedux.js';
 
 
-const Component = ({className, posts}) => (
+const Component = ({className, posts, user}) => (
   <div className={clsx(className, styles.root)}>
     <CardGroup>
       {posts.map(post => (
@@ -38,19 +39,23 @@ const Component = ({className, posts}) => (
         </Card>
       ))}
     </CardGroup>
-    <Button className={styles.form_button} href='post/add'size="lg" block variant="dark" type="submit">
+    {user.isLogged ?
+      <Button className={styles.form_button} href='post/add'size="lg" block variant="dark" type="submit">
       Add Post
-    </Button>
+      </Button>
+      : ''}
   </div>
 );
 
 Component.propTypes = {
   className: PropTypes.string,
   posts: PropTypes.array,
+  user: PropTypes.object,
 };
 
 const mapStateToProps = state => ({
   posts: getAll(state),
+  user: getUser(state),
 });
 
 

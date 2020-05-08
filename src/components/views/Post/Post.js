@@ -10,10 +10,12 @@ import Button from 'react-bootstrap/Button';
 
 import { connect } from 'react-redux';
 import { getAll } from '../../../redux/postsRedux.js';
+import { getUser } from '../../../redux/userRedux.js';
+
 
 import styles from './Post.module.scss';
 
-const Component = ({className, posts, match}) => {
+const Component = ({className, posts, match, user}) => {
   return(
     <div className={clsx(className, styles.root)}>
       {posts.filter(post => post.id === match.params.id).map(post => (
@@ -34,9 +36,11 @@ const Component = ({className, posts, match}) => {
             <ListGroupItem>${post.price}</ListGroupItem>
           </ListGroup>
           <Card.Body>
-            <Button variant="primary" size="lg"  href={`/post/${post.id}/edit`} block>
+            {user.isLogged ?
+              <Button variant="primary" size="lg"  href={`/post/${post.id}/edit`} block>
               Edit Post
-            </Button>
+              </Button>
+              : ''}
             <Button variant="secondary" href="/" size="lg" block>
               Go back
             </Button>
@@ -53,10 +57,13 @@ Component.propTypes = {
     params: PropTypes.shape({
       id: PropTypes.string,
     }),
-  })};
+  }),
+  user:PropTypes.object,
+};
 
 const mapStateToProps = state => ({
   posts: getAll(state),
+  user: getUser(state),
 });
 
 const PostContainer = connect(mapStateToProps)(Component);

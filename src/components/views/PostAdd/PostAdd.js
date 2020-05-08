@@ -199,9 +199,9 @@ const mapDispatchToProps = dispatch => ({
   addPost: post => dispatch(addPost(post)),
 });
 
-const PostAddContainer = connect(mapStateToProps, mapDispatchToProps)(Component);
+const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
 
 export {
-  PostAddContainer as PostAdd,
+  Container as PostAdd,
   Component as PostAddComponent,
 };
