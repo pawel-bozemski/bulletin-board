@@ -18,7 +18,7 @@ const Component = ({className, posts}) => (
         <Card className={styles.card_ad} key={post.id}>
           <Card.Img className={styles.card_img} variant="top" src={post.img} />
           <Card.Body>
-            <Card.Title><a href={`/post/:${post.id}`}>{post.title}</a></Card.Title>
+            <Card.Title><a href={`/post/${post.id}`}>{post.title}</a></Card.Title>
             <Card.Text>
               ${post.price}
             </Card.Text>
