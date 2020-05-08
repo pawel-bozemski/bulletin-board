@@ -9,8 +9,6 @@ import { getUser } from '../../../redux/userRedux.js';
 
 
 const Component = (user) =>  {
-
-
   return (
     <div className={styles.root}>
       <Navbar expand="lg" variant="light" bg="light">
@@ -30,7 +28,6 @@ const Component = (user) =>  {
             Login with Google
             </Button>
           }
-
         </Container>
       </Navbar>
     </div>
@@ -38,7 +35,6 @@ const Component = (user) =>  {
 };
 
 Component.propTypes = {
-  children: PropTypes.node,
   className: PropTypes.string,
 };
 

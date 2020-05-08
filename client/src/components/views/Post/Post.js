@@ -1,18 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import clsx from 'clsx';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import ListGroupItem from 'react-bootstrap/ListGroupItem';
 import Button from 'react-bootstrap/Button';
-
-
 import { connect } from 'react-redux';
 import { getAll } from '../../../redux/postsRedux.js';
 import { getUser } from '../../../redux/userRedux.js';
-
-
 import styles from './Post.module.scss';
 
 const Component = ({className, posts, match, user}) => {

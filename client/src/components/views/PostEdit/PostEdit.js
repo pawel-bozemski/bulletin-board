@@ -4,23 +4,14 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import clsx from 'clsx';
-import uniqid from 'uniqid';
 import { connect } from 'react-redux';
-import { getAll, addPost } from '../../../redux/postsRedux.js';
+import { getAll, editPost } from '../../../redux/postsRedux.js';
+import styles from './PostEdit.module.scss';
 
-import styles from './PostAdd.module.scss';
+const Component = ({className, editPost, posts, match}) =>  {
 
-
-const Component = ({className, addPost}) =>  {
-  const day = new Date().getDate();
-  const month = new Date().getMonth();
-  const year = new Date().getFullYear();
-  const date = day + '/' + month + '/' + year;
-
-  const [post, setPost] = React.useState({
-    id:uniqid(),
-    date: date,
-  });
+  const postToEdit = posts.filter(post => post.id === match.params.id);
+  const [post, setPost] = React.useState(postToEdit[0]);
 
   const handleChange = (e, name) => {
     setPost({
@@ -31,8 +22,7 @@ const Component = ({className, addPost}) =>  {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addPost(post);
-    console.log('post add', post);
+    editPost(post);
   };
 
   return(
@@ -188,20 +178,26 @@ const Component = ({className, addPost}) =>  {
 
 Component.propTypes = {
   className: PropTypes.string,
-  addPost: PropTypes.func,
+  editPost: PropTypes.func,
+  posts: PropTypes.array,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string,
+    }),
+  }),
 };
 
 const mapStateToProps = state => ({
-  post: getAll(state),
+  posts: getAll(state),
 });
 
 const mapDispatchToProps = dispatch => ({
-  addPost: post => dispatch(addPost(post)),
+  editPost: post => dispatch(editPost(post)),
 });
 
 const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
 
 export {
-  Container as PostAdd,
-  Component as PostAddComponent,
+  Container as PostEdit,
+  Component as PostEditComponent,
 };
