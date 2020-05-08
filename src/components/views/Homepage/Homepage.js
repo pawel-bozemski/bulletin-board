@@ -38,7 +38,7 @@ const Component = ({className, posts}) => (
         </Card>
       ))}
     </CardGroup>
-    <Button className={styles.form_button}  size="lg" block variant="dark" type="submit">
+    <Button className={styles.form_button} href='post/add'size="lg" block variant="dark" type="submit">
       Add Post
     </Button>
   </div>
