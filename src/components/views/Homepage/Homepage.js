@@ -3,47 +3,22 @@ import PropTypes from 'prop-types';
 import CardGroup from 'react-bootstrap/CardGroup';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import { connect } from 'react-redux';
+import { getAll } from '../../../redux/postsRedux.js';
 
 
 import clsx from 'clsx';
-
-// import { connect } from 'react-redux';
-// import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
-
 import styles from './Homepage.module.scss';
 
-const mockData = [
-  {
-    id: 1,
-    title: 'Seat leon 2015',
-    name: 'Jonasz',
-    phone: '54655487',
-    location: 'Lublin',
-    price: '2137',
-    date: '05.05.2020',
-    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/2016_SEAT_Leon_SE_Dynamic_Technology_1.2.jpg/800px-2016_SEAT_Leon_SE_Dynamic_Technology_1.2.jpg',
-  },
-  {
-    id: 2,
-    title: 'Merida bicycle',
-    name: 'Janusz',
-    phone: '54655487',
-    state: 'used',
-    location: 'swidnik',
-    price: '545',
-    date: '02.04.2020',
-    img: 'https://www.bikko.pl/media/catalog/product/cache/1/image/b38cf51ec77170b109c5e310157197eb/2/9/29_1800-d_1_1.jpg',
-  },
-];
 
-const Component = ({className, children}) => (
+const Component = ({className, posts}) => (
   <div className={clsx(className, styles.root)}>
     <CardGroup>
-      {mockData.map(post => (
+      {posts.map(post => (
         <Card className={styles.card_ad} key={post.id}>
           <Card.Img className={styles.card_img} variant="top" src={post.img} />
           <Card.Body>
-            <Card.Title>{post.title}</Card.Title>
+            <Card.Title><a href={`/post/:${post.id}`}>{post.title}</a></Card.Title>
             <Card.Text>
               ${post.price}
             </Card.Text>
@@ -70,22 +45,22 @@ const Component = ({className, children}) => (
 );
 
 Component.propTypes = {
-  children: PropTypes.node,
   className: PropTypes.string,
+  posts: PropTypes.array,
 };
 
-// const mapStateToProps = state => ({
-//   someProp: reduxSelector(state),
-// });
+const mapStateToProps = state => ({
+  posts: getAll(state),
+});
 
 // const mapDispatchToProps = dispatch => ({
 //   someAction: arg => dispatch(reduxActionCreator(arg)),
 // });
 
-// const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
+const HomepageContainer = connect(mapStateToProps)(Component);
 
 export {
-  Component as Homepage,
-  // Container as Homepage,
+  // Component as Homepage,
+  HomepageContainer as Homepage,
   Component as HomepageComponent,
 };
