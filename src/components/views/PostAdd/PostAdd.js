@@ -5,14 +5,13 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import clsx from 'clsx';
 import uniqid from 'uniqid';
-
-// import { connect } from 'react-redux';
-// import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
+import { connect } from 'react-redux';
+import { getAll, addPost } from '../../../redux/postsRedux.js';
 
 import styles from './PostAdd.module.scss';
 
 
-const Component = ({className}) =>  {
+const Component = ({className, addPost}) =>  {
   const day = new Date().getDate();
   const month = new Date().getMonth();
   const year = new Date().getFullYear();
@@ -30,9 +29,15 @@ const Component = ({className}) =>  {
     });
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    addPost(post);
+    console.log('post add', post);
+  };
+
   return(
     <div className={clsx(className, styles.root)}>
-      <Form className={styles.form}>
+      <Form className={styles.form}  onSubmit={e => handleSubmit(e)}>
         <Form.Row className={styles.form_row}>
           <Col lg={4} className={styles.col_title}>
             <Form.Group controlId="epostName">
@@ -124,6 +129,19 @@ const Component = ({className}) =>  {
               />
             </Form.Group>
           </Col>
+          <Col lg={8} className={styles.col_title}>
+            <Form.Group controlId="postImg">
+              <Form.Label>Add photolink</Form.Label>
+              <Form.Control
+                required
+                type="text"
+                placeholder="paste link here"
+                value={post.image}
+                onChange={e => handleChange(e, 'image')}
+              />
+            </Form.Group>
+          </Col>
+
           <Col lg={4} className={styles.col_title}>
             <Form.Group controlId="postPrice">
               <Form.Label>Price</Form.Label>
@@ -170,20 +188,20 @@ const Component = ({className}) =>  {
 
 Component.propTypes = {
   className: PropTypes.string,
+  addPost: PropTypes.func,
 };
 
-// const mapStateToProps = state => ({
-//   someProp: reduxSelector(state),
-// });
+const mapStateToProps = state => ({
+  post: getAll(state),
+});
 
-// const mapDispatchToProps = dispatch => ({
-//   someAction: arg => dispatch(reduxActionCreator(arg)),
-// });
+const mapDispatchToProps = dispatch => ({
+  addPost: post => dispatch(addPost(post)),
+});
 
-// const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
+const PostAddContainer = connect(mapStateToProps, mapDispatchToProps)(Component);
 
 export {
-  Component as PostAdd,
-  // Container as PostAdd,
+  PostAddContainer as PostAdd,
   Component as PostAddComponent,
 };

@@ -43,18 +43,4 @@ export const initialState = {
       error: false,
     },
   },
-  users: [
-    {
-      id: '1',
-      email: 'jonasz@daw.com',
-    },
-    {
-      id: '2',
-      email: 'janusz@www.com',
-    },
-    {
-      id: '3',
-      email: 'mark@com.com',
-    },
-  ],
 };
