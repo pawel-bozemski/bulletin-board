@@ -8,6 +8,6 @@ export const initialState = {
   },
   user: {
     id: '1',
-    isLogged: false,
+    isLogged: true,
   },
 };

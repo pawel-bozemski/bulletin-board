@@ -18,7 +18,6 @@ class Component extends React.Component {
   }
   render() {
     const {className, posts, user, match} = this.props;
-    console.log('posts', posts[0]);
     return (
       <div className={clsx(className, styles.root)}>
         {posts.filter(post => post._id === match.params.id).map(post => (
@@ -40,7 +39,7 @@ class Component extends React.Component {
             </ListGroup>
             <Card.Body>
               {user.isLogged ?
-                <Button variant="primary" size="lg"  href={`/post/${post.id}/edit`} block>
+                <Button variant="primary" size="lg"  href={`/post/${post._id}/edit`} block>
               Edit Post
                 </Button>
                 : ''}
