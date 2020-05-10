@@ -37,6 +37,23 @@ export const fetchPublished = () => {
       });
   };
 };
+
+export const addPostRequest = (post) => {
+  console.log('post', post);
+  return (dispatch) => {
+    dispatch(fetchStarted());
+
+    Axios
+      .post('http://localhost:8000/api/posts/add', post)
+      .then(res => {
+        dispatch(addPost(res));
+      })
+      .catch(err => {
+        dispatch(fetchError(err.message || true));
+      });
+  };
+};
+
 /* reducer */
 export const reducer = (statePart = [], action = {}) => {
   switch (action.type) {
@@ -71,10 +88,7 @@ export const reducer = (statePart = [], action = {}) => {
     case ADD_POST: {
       return {
         ...statePart,
-        data: [
-          ...statePart.data,
-          action.payload,
-        ],
+        data: [ ...statePart.data, {...action.payload}],
       };
     }
     case EDIT_POST: {

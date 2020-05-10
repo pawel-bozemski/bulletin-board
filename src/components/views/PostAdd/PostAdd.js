@@ -5,22 +5,21 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import clsx from 'clsx';
-import uniqid from 'uniqid';
 import { connect } from 'react-redux';
-import { getAll, addPost } from '../../../redux/postsRedux.js';
+import {addPostRequest } from '../../../redux/postsRedux.js';
 
 import styles from './PostAdd.module.scss';
 
 const day = new Date().getDate();
 const month = new Date().getMonth();
 const year = new Date().getFullYear();
-const date = day + '/' + month + '/' + year;
+const date = day + '.' + month + '.' + year;
 
 class Component extends React.Component {
 state = {
   post: {
-    id: uniqid(),
     created: date,
+    upadted: date,
     title: '',
     location: '',
     text: '',
@@ -32,23 +31,22 @@ state = {
   },
 }
 
-
 handleChange = (e, name) => {
   const { post } = this.state;
 
   this.setState({ post: { ...post, [name]: e.target.value } });
 };
 B
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     const { post } = this.state;
     const { addPost } = this.props;
     e.preventDefault();
-    addPost(post);
-    console.log('post', post);
+    await addPost(post);
   };
   render() {
-    const {handleSubmit } = this;
-    const { post, className } = this.props;
+    const { handleSubmit } = this;
+    const { className } = this.props;
+    const { post } = this.state;
 
     return(
       <div className={clsx(className, styles.root)}>
@@ -194,11 +192,10 @@ Component.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  post: getAll(state),
 });
 
 const mapDispatchToProps = dispatch => ({
-  addPost: post => dispatch(addPost(post)),
+  addPost: post => dispatch(addPostRequest(post)),
 });
 
 const Container = connect(mapStateToProps, mapDispatchToProps)(Component);

@@ -23,9 +23,20 @@ router.get('/posts/:id', async (req, res) => {
       .findById(req.params.id);
     if(!result) res.status(404).json({ post: 'Not found' });
     else res.json(result);
+
   }
   catch(err) {
     res.status(500).json(err);
+  }
+});
+
+router.post('/posts/add', async (req, res) => {
+  try {
+    const newPost = new Post({ ...req.body });
+    await newPost.save();
+    res.json(newPost);
+  } catch (err) {
+    res.status(500).json({ messaage: err });
   }
 });
 
