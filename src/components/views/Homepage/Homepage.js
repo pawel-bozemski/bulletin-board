@@ -24,24 +24,14 @@ class Component extends React.Component {
         <CardGroup>
           {posts.map(post => (
             <Card className={styles.card_ad} key={post.id}>
-              <Card.Img className={styles.card_img} variant="top" src={post.img} />
+              {post.photo === null ? '' : <Card.Img className={styles.card_img} variant="top" src={post.img} />}
               <Card.Body>
-                <Card.Title><a href={`/post/${post.id}`}>{post.title}</a></Card.Title>
-                <Card.Text>
-              ${post.price}
-                </Card.Text>
-                <Card.Text>
-              Seller: {post.name}
-                </Card.Text>
-                <Card.Text>
-              City: {post.location}
-                </Card.Text>
-                <Card.Text>
-              phone: {post.phone}
-                </Card.Text>
+                <Card.Title><a href={`/post/${post._id}`}>{post.title}</a></Card.Title>
+                {post.price < 0 ? <Card.Text>${post.price}</Card.Text>: ''}
+                <Card.Text> By: {post.author} </Card.Text>
               </Card.Body>
               <Card.Footer>
-                <small className="text-muted">Published {post.date}</small>
+                <small className="text-muted">Published {post.created}</small>
               </Card.Footer>
             </Card>
           ))}
